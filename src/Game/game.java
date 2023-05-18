@@ -13,7 +13,7 @@ public class game {
         showBoard();
         setMove();
         while(!win) {
-            if(moves == 9 && !win) {
+            if(moves == 9) {
                 System.out.println("Draw");
             }
             setMove();
@@ -52,49 +52,56 @@ public class game {
         System.out.println("  -------------\n");
     }
     public void setMove() {
+        boolean moveFlag = true;
+        while (moveFlag) {
         for (int i = 1; i < 3; i++) {
-            System.out.println(i);
-            System.out.println(" player " + i + " ");
-            for (int j = 1; j < 3; j++) {
-                System.out.print(" Set ur move " + j + " -> ");
-                num = sc.nextInt();
-                if (num > 3) {
-                    System.out.println(num + " is incorrect cords");
-                } else if (num < 1) {
-                    System.out.println(num + " is incorrect cords");
-                } else if (j == 1) {
-                    b = (num - 1);
-                } else {
-                    a = (num - 1);
+                System.out.println(" player " + i + " ");
+                for (int j = 1; j < 3; j++) {
+                    System.out.print(" Set ur move " + j + " -> ");
+                    num = sc.nextInt();
+                    if (num > 3 || num < 1) {
+                        System.out.println(num + " is incorrect cords");
+                        moveFlag = !moveFlag;
+                        break;
+                    } else if (j == 1) {
+                        b = (num - 1);
+                    } else {
+                        a = (num - 1);
+                    }
                 }
+                System.out.println();
+                if (i == 1) {
+                    if (board[a][b] == o) {
+                        System.out.println(":( this cord is busy, try again\n");
+                        setMove();
+                    } else if (board[a][b] == x) {
+                        System.out.println(":( you already set this cords\n");
+                        setMove();
+                    } else {
+                        board[a][b] = x;
+                        moveFlag = !moveFlag;
+                        moves++;
+                    }
+                }
+                if (i == 2) {
+                    if (board[a][b] == x) {
+                        System.out.println(":( this cord is busy, try again\n");
+                        setMove();
+                    } else if (board[a][b] == o) {
+                        System.out.println(":( you already set this cords\n");
+                        setMove();
+                    } else {
+                        board[a][b] = o;
+                        moveFlag = !moveFlag;
+                        moves++;
+                    }
+                }
+                if(moveFlag) {
+                    showBoard();
+                }
+                showBoard();
+                win();
             }
-            System.out.println();
-            if (i == 1) {
-                if(board[a][b] == o) {
-                    System.out.println("this cord is busy, try again :(\n");
-                    setMove();
-                } else if(board[a][b] == x) {
-                    System.out.println("you already set this cords :(\n");
-                    setMove();
-                } else {
-                    board[a][b] = x;
-                }
-            } if (i == 2){
-                if(board[a][b] == x) {
-                    System.out.println("this cord is busy, try again :(\n");
-                    i = 2;
-                    setMove();
-                } else if(board[a][b] == o) {
-                    System.out.println("you already set this cords :(\n");
-                    i = 2;
-                    setMove();
-                } else {
-                    board[a][b] = o;
-                }
-            }
-            moves++;
-            showBoard();
-            win();
         }
     }
     //introduce developer and game rules
