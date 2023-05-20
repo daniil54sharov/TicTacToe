@@ -2,7 +2,7 @@ package Game;
 import java.util.Scanner;
 public class game {
     Scanner sc = new Scanner(System.in);
-    //game board [[~, ~, ~], [~, ~, ~], [~, ~, ~]]
+    //game board [~, ~, ~], [~, ~, ~][~, ~, ~], []
     char[][] board = new char[3][3];
     boolean win = false;
     char x = 'X', o = 'O';
@@ -13,9 +13,6 @@ public class game {
         showBoard();
         setMove();
         while(!win) {
-            if(moves == 9) {
-                System.out.println("Draw");
-            }
             setMove();
         }
     }
@@ -81,6 +78,7 @@ public class game {
                         board[a][b] = x;
                         moveFlag = !moveFlag;
                         moves++;
+                        System.out.println(moves);
                     }
                 }
                 if (i == 2) {
@@ -94,13 +92,11 @@ public class game {
                         board[a][b] = o;
                         moveFlag = !moveFlag;
                         moves++;
+                        System.out.println(moves);
                     }
                 }
-                if(moveFlag) {
-                    showBoard();
-                }
-                showBoard();
-                win();
+            showBoard();
+            win();
             }
         }
     }
@@ -148,6 +144,9 @@ public class game {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
+        } else if (moves == 9) {
+            System.out.println("!!! DRAW !!!");
+            System.exit(0);
         }
         //- - - o
         if(board[0][0] == o && board[0][1] == o && board[0][2] == o) {
@@ -187,6 +186,9 @@ public class game {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
+        } else if (moves == 9) {
+            System.out.println("!!! DRAW !!!");
+            System.exit(0);
         }
     }
 }
