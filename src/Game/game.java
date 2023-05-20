@@ -55,7 +55,7 @@ public class game {
                     System.out.print(" Set ur move " + j + " -> ");
                     num = sc.nextInt();
                 System.out.println();
-                    while(num >3 || num < 1) {
+                    while(num > 3 || num < 1) {
                         System.out.println(num + " is incorrect cords");
                         System.out.println(" player " + i + " ");
                         System.out.print(" Set ur move " + j + " -> ");
