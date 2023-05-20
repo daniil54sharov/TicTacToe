@@ -90,7 +90,6 @@ public class game {
                         setMove();
                     } else {
                         board[a][b] = o;
-//                        moveFlag = false;
                         moves++;
                         System.out.println(moves);
                     }
