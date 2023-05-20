@@ -16,7 +16,7 @@ public class game {
             setMove();
         }
     }
-    // all of cords equal '~'
+    // all cords equal '~'
     public void setBoard() {
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
@@ -49,21 +49,23 @@ public class game {
         System.out.println("  -------------\n");
     }
     public void setMove() {
-        boolean moveFlag = true;
-        while (moveFlag) {
         for (int i = 1; i < 3; i++) {
-                System.out.println(" player " + i + " ");
-                for (int j = 1; j < 3; j++) {
+            for (int j = 1; j < 3; j++) {
+                    System.out.println(" player " + i + " ");
                     System.out.print(" Set ur move " + j + " -> ");
                     num = sc.nextInt();
-                    if (num > 3 || num < 1) {
+                System.out.println();
+                    while(num >3 || num < 1) {
                         System.out.println(num + " is incorrect cords");
-                        moveFlag = !moveFlag;
-                        break;
-                    } else if (j == 1) {
-                        b = (num - 1);
+                        System.out.println(" player " + i + " ");
+                        System.out.print(" Set ur move " + j + " -> ");
+                        num = sc.nextInt();
+                        System.out.println();
+                    }
+                    if (j == 1) {
+                        b = num - 1;
                     } else {
-                        a = (num - 1);
+                        a = num - 1;
                     }
                 }
                 System.out.println();
@@ -76,9 +78,7 @@ public class game {
                         setMove();
                     } else {
                         board[a][b] = x;
-                        moveFlag = !moveFlag;
                         moves++;
-                        System.out.println(moves);
                     }
                 }
                 if (i == 2) {
@@ -90,7 +90,7 @@ public class game {
                         setMove();
                     } else {
                         board[a][b] = o;
-                        moveFlag = !moveFlag;
+//                        moveFlag = false;
                         moves++;
                         System.out.println(moves);
                     }
@@ -99,7 +99,6 @@ public class game {
             win();
             }
         }
-    }
     //introduce developer and game rules
     public void introduce() {
         String info = "\n =============RULES=============\n  first number vertically cords\n second number horizontally cords\n      ' :( ' means error\n =====Created by Sharik ;D======\n";
