@@ -100,7 +100,7 @@ public class game {
         }
     //introduce developer and game rules
     public void introduce() {
-        String info = "\n =============RULES=============\n  first number vertically cords\n second number horizontally cords\n      ' :( ' means error\n =====Created by Sharik ;D======\n";
+        String info = "\n =============RULES=============\n  first number vertically cords\n second number horizontally cords\n      ' :( ' means error\n =====Created by Кулька ;D======\n";
         System.out.println(info);
     }
     public void win() {
@@ -132,7 +132,7 @@ public class game {
             win = true;
         }
         // / x
-        else if(board[0][0] == x && board[1][1] == x && board[2][2] == x) {
+        else if(board[2][0] == x && board[1][1] == x && board[0][2] == x) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
@@ -174,7 +174,7 @@ public class game {
             win = true;
         }
         // / o
-        else if(board[0][0] == o && board[1][1] == o && board[2][2] == o) {
+        else if(board[2][0] == o && board[1][1] == o && board[0][2] == o) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
@@ -184,9 +184,6 @@ public class game {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
-        } else if (moves == 9) {
-            System.out.println("!!! DRAW !!!");
-            System.exit(0);
         }
     }
 }
