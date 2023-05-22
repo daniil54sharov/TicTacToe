@@ -3,18 +3,26 @@ import java.util.Scanner;
 public class game {
     Scanner sc = new Scanner(System.in);
     //game board [~, ~, ~], [~, ~, ~][~, ~, ~], []
+    String player1, player2;
     char[][] board = new char[3][3];
     boolean win = false;
     char x = 'X', o = 'O';
     int num, a, b, moves;
     game() {
         introduce();
+        setPlayers();
         setBoard();
         showBoard();
         setMove();
         while(!win) {
             setMove();
         }
+    }
+    public void setPlayers() {
+        System.out.print("Player1 enter your name -> ");
+        player1 = sc.nextLine();
+        System.out.print("Player2 enter your name -> ");
+        player2 = sc.nextLine();
     }
     // all cords equal '~'
     public void setBoard() {
@@ -51,14 +59,20 @@ public class game {
     public void setMove() {
         for (int i = 1; i < 3; i++) {
             for (int j = 1; j < 3; j++) {
-                    System.out.println(" player " + i + " ");
-                    System.out.print(" Set ur move " + j + " -> ");
+                if(i == 1) {
+                    System.out.print(player1 + " set your move " + j + " -> ");
+                } else if (i == 2) {
+                    System.out.print(player2 + " set your move " + j + " -> ");
+                }
                     num = sc.nextInt();
                 System.out.println();
-                    while(num > 3 || num < 1) {
+                    while(num > 3 || num < 1 ) {
                         System.out.println(num + " is incorrect cords");
-                        System.out.println(" player " + i + " ");
-                        System.out.print(" Set ur move " + j + " -> ");
+                        if(i == 1) {
+                            System.out.print(player1 + " set your move " + j + " again -> ");
+                        } else if (i == 2) {
+                            System.out.print(player2 + " set your move " + j + " again -> ");
+                        }
                         num = sc.nextInt();
                         System.out.println();
                     }
@@ -131,14 +145,14 @@ public class game {
             System.exit(0);
             win = true;
         }
-        // / x
+        // \ x
         else if(board[0][0] == x && board[1][1] == x && board[2][2] == x) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
         }
-        // \ x
-        else if(board[1][2] == x && board[1][1] == x && board[2][1] == x) {
+        // / x
+        else if(board[2][0] == x && board[1][1] == x && board[0][2] == x) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
@@ -180,7 +194,7 @@ public class game {
             win = true;
         }
         // \ o
-        else if(board[1][2] == o && board[1][1] == o && board[2][1] == o) {
+        else if(board[2][0] == o && board[1][1] == o && board[0][2] == o) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
