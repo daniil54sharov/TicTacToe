@@ -1,28 +1,20 @@
 package Game;
 import java.util.Scanner;
 public class game {
-    Scanner sc = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
     //game board [~, ~, ~], [~, ~, ~][~, ~, ~], []
     String player1, player2;
     char[][] board = new char[3][3];
     boolean win = false;
-    char x = 'X', o = 'O';
-    int num, a, b, moves;
+    char playerX = 'X', playerO = 'O';
+    int move, a, b, movesCounter;
     game() {
-        introduce();
-        setPlayers();
-        setBoard();
-        showBoard();
-        setMove();
-        while(!win) {
-            setMove();
-        }
     }
     public void setPlayers() {
         System.out.print("Player1 enter your name -> ");
-        player1 = sc.nextLine();
+        player1 = scan.nextLine();
         System.out.print("Player2 enter your name -> ");
-        player2 = sc.nextLine();
+        player2 = scan.nextLine();
     }
     // all cords equal '~'
     public void setBoard() {
@@ -60,56 +52,56 @@ public class game {
         for (int i = 1; i < 3; i++) {
             for (int j = 1; j < 3; j++) {
                 if(i == 1) {
-                    System.out.print(player1 + " set your move " + j + " -> ");
+                    System.out.print(player1 + " set your move vertical -> ");
                 } else if (i == 2) {
-                    System.out.print(player2 + " set your move " + j + " -> ");
+                    System.out.print(player2 + " set your move hirizontal -> ");
                 }
-                    num = sc.nextInt();
+                    move = scan.nextInt();
                 System.out.println();
-                    while(num > 3 || num < 1 ) {
-                        System.out.println(num + " is incorrect cords");
+                    while(move > 3 || move < 1 ) {
+                        System.out.println(move + " is incorrect cords");
                         if(i == 1) {
                             System.out.print(player1 + " set your move " + j + " again -> ");
                         } else if (i == 2) {
                             System.out.print(player2 + " set your move " + j + " again -> ");
                         }
-                        num = sc.nextInt();
+                        move = scan.nextInt();
                         System.out.println();
                     }
                     if (j == 1) {
-                        b = num - 1;
+                        b = move - 1;
                     } else {
-                        a = num - 1;
+                        a = move - 1;
                     }
                 }
                 System.out.println();
                 if (i == 1) {
-                    if (board[a][b] == o) {
+                    if (board[a][b] == playerO) {
                         System.out.println(":( this cord is busy, try again\n");
                         setMove();
-                    } else if (board[a][b] == x) {
+                    } else if (board[a][b] == playerX) {
                         System.out.println(":( you already set this cords\n");
                         setMove();
                     } else {
-                        board[a][b] = x;
-                        moves++;
+                        board[a][b] = playerX;
+                        movesCounter++;
                     }
                 }
                 if (i == 2) {
-                    if (board[a][b] == x) {
+                    if (board[a][b] == playerX) {
                         System.out.println(":( this cord is busy, try again\n");
                         setMove();
-                    } else if (board[a][b] == o) {
+                    } else if (board[a][b] == playerO) {
                         System.out.println(":( you already set this cords\n");
                         setMove();
                     } else {
-                        board[a][b] = o;
-                        moves++;
-                        System.out.println(moves);
+                        board[a][b] = playerO;
+                        movesCounter++;
+                        System.out.println(movesCounter);
                     }
                 }
             showBoard();
-            win();
+            checkWin();
             }
         }
     //introduce developer and game rules
@@ -117,88 +109,88 @@ public class game {
         String info = "\n =============RULES=============\n  first number vertically cords\n second number horizontally cords\n      ' :( ' means error\n =====Created by Sharik ;D======\n";
         System.out.println(info);
     }
-    public void win() {
+    public void checkWin() {
         //- - - x
         // тут я посмотрел в интернете про System.exit()
-        if(board[0][0] == x && board[0][1] == x && board[0][2] == x) {
+        if(board[0][0] == playerX && board[0][1] == playerX && board[0][2] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[1][0] == x && board[1][1] == x && board[1][2] == x) {
+        } else if(board[1][0] == playerX && board[1][1] == playerX && board[1][2] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[2][0] == x && board[2][1] == x && board[2][2] == x) {
+        } else if(board[2][0] == playerX && board[2][1] == playerX && board[2][2] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;// | | | x
-        } else if(board[0][0] == x && board[1][0] == x && board[2][0] == x) {
+        } else if(board[0][0] == playerX && board[1][0] == playerX && board[2][0] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[0][1] == x && board[1][1] == x && board[2][1] == x) {
+        } else if(board[0][1] == playerX && board[1][1] == playerX && board[2][1] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[0][2] == x && board[1][2] == x && board[2][2] == x) {
+        } else if(board[0][2] == playerX && board[1][2] == playerX && board[2][2] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
         }
         // \ x
-        else if(board[0][0] == x && board[1][1] == x && board[2][2] == x) {
+        else if(board[0][0] == playerX && board[1][1] == playerX && board[2][2] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
         }
         // / x
-        else if(board[2][0] == x && board[1][1] == x && board[0][2] == x) {
+        else if(board[2][0] == playerX && board[1][1] == playerX && board[0][2] == playerX) {
             System.out.println("!!! X WON!!!");
             System.exit(0);
             win = true;
-        } else if (moves == 9) {
+        } else if (movesCounter == 9) {
             System.out.println("!!! DRAW !!!");
             System.exit(0);
         }
         //- - - o
-        if(board[0][0] == o && board[0][1] == o && board[0][2] == o) {
+        if(board[0][0] == playerO && board[0][1] == playerO && board[0][2] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[1][0] == o && board[1][1] == o && board[1][2] == o) {
+        } else if(board[1][0] == playerO && board[1][1] == playerO && board[1][2] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[2][0] == o && board[2][1] == o && board[2][2] == o) {
+        } else if(board[2][0] == playerO && board[2][1] == playerO && board[2][2] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
             // | | | o
-        } else if(board[0][0] == o && board[1][0] == o && board[2][0] == o) {
+        } else if(board[0][0] == playerO && board[1][0] == playerO && board[2][0] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[0][1] == o && board[1][1] == o && board[2][1] == o) {
+        } else if(board[0][1] == playerO && board[1][1] == playerO && board[2][1] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
-        } else if(board[0][2] == o && board[1][2] == o && board[2][2] == o) {
+        } else if(board[0][2] == playerO && board[1][2] == playerO && board[2][2] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
         }
         // / o
-        else if(board[0][0] == o && board[1][1] == o && board[2][2] == o) {
+        else if(board[0][0] == playerO && board[1][1] == playerO && board[2][2] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
         }
         // \ o
-        else if(board[2][0] == o && board[1][1] == o && board[0][2] == o) {
+        else if(board[2][0] == playerO && board[1][1] == playerO && board[0][2] == playerO) {
             System.out.println("!!! O WON!!!");
             System.exit(0);
             win = true;
-        } else if (moves == 9) {
+        } else if (movesCounter == 9) {
             System.out.println("!!! DRAW !!!");
             System.exit(0);
         }
